@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-# ✅ FIRST create app
+from app.routes import location  # your existing route
+
 app = FastAPI()
 
-# ✅ THEN add middleware
+# CORS (important for Flutter later)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,7 +14,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 👉 your routes import
-from app.routes import location
-
+# include routes
 app.include_router(location.router)
