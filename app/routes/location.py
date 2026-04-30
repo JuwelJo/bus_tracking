@@ -198,9 +198,9 @@ def get_location(bus_id: int, db: Session = Depends(get_db)):
 
 # 🔷 ETA (🔥 FINAL SMART VERSION)
 import requests
+import os
 
-MAPBOX_TOKEN = "pk.eyJ1IjoianV3ZWxqbyIsImEiOiJjbW54ZjQ1eDgwMWtmMndzMDN6eXpucTAzIn0.TbsHTU--12y5OkwUBqRY5A"
-
+MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
 
 def get_mapbox_route(lat1, lon1, lat2, lon2):
     url = f"https://api.mapbox.com/directions/v5/mapbox/driving/{lon1},{lat1};{lon2},{lat2}?geometries=geojson&access_token={MAPBOX_TOKEN}"

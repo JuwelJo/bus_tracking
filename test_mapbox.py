@@ -3,7 +3,9 @@ from sqlalchemy import create_engine, text
 
 engine = create_engine("mysql+mysqlconnector://root:9yjojruvuCOC@localhost:3306/bus_tracking")
 
-MAPBOX_TOKEN = "pk.eyJ1IjoianV3ZWxqbyIsImEiOiJjbW54ZjQ1eDgwMWtmMndzMDN6eXpucTAzIn0.TbsHTU--12y5OkwUBqRY5A"
+import os
+
+MAPBOX_TOKEN = os.getenv("MAPBOX_TOKEN")
 
 start = "76.950577,8.544067"
 end = "76.960000,8.550000"
