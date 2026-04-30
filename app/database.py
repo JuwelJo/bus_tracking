@@ -8,17 +8,24 @@ engine = create_engine(
     connect_args={"check_same_thread": False}
 )
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 
 Base = declarative_base()
 
-# Create tables
-Base.metadata.create_all(bind=engine)
 
-# ✅ THIS IS WHAT YOU WERE MISSING
+# 🔹 Dependency (used in routes)
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
+
+
+# 🔹 Call this manually from main.py
+def init_db():
+    Base.metadata.create_all(bind=engine)

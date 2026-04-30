@@ -3,6 +3,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.location import router as location_router
+from app.database import init_db
+
+init_db()
 
 app = FastAPI()
 
