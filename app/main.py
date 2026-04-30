@@ -1,11 +1,11 @@
+from app.routes.admin import router as admin_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routes import location  # your existing route
+from app.routes.location import router as location_router
 
 app = FastAPI()
 
-# CORS (important for Flutter later)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -14,5 +14,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# include routes
-app.include_router(location.router)
+app.include_router(location_router, prefix="")
+app.include_router(admin_router)   # ✅ ADD THIS
+
+@app.get("/")
+def home():
+    return {"message": "Server running 🚍"}
